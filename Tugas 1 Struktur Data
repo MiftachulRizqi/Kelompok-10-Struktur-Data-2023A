@@ -27,3 +27,28 @@ class LinkedList:
             total_harga += current.harga * current.jumlah
             current = current.next
         return total_harga
+
+total_harga += current.harga * current.jumlah
+            current = current.next
+        return total_harga
+
+# Menu Miexue
+menu_miexue = {
+    'Miexue Ice Cream' : 5000,
+    'Boba Shake'       : 16000,
+    'Mi Sundae'        : 14000,
+    'Mi Ganas'         : 11000,
+    'Creamy Mango Boba': 22000
+}
+
+# Inisialisasi linked list
+keranjang_pesanan = LinkedList()
+
+# Daftar menu 
+print("Selamat Datang Di Mixue Cabang D4 MIE :)")
+
+
+print("====================================")
+print("             Home Page              ")
+print("      Aplikasi Pemesanan Mixue      ")
+print("====================================")
