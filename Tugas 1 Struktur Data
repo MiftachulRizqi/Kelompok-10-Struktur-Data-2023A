@@ -52,3 +52,30 @@ print("====================================")
 print("             Home Page              ")
 print("      Aplikasi Pemesanan Mixue      ")
 print("====================================")
+
+print("1. Miexue Ice Cream     : Rp 5.000  |")
+print("2. Boba Shake           : Rp 16.000 |")
+print("3. Mi Sundae            : Rp 14.000 |")
+print("4. Mi Ganas             : Rp 11.000 |")
+print("5. Creamy Mango Boba    : Rp 22.000 |")
+
+print("====================================")
+print("       Mixue Cabang D4 MIE          ")
+print("====================================")
+
+# Fungsi untuk menambah pesanan ke keranjang
+def tambah_pesanan_ke_keranjang(menu):
+    for nama_menu, harga in menu.items():
+        pesan = input(f"Apakah Ingin Memesan {nama_menu}? (y/n): ")
+        if pesan.lower()=='y':
+            Jumlah = int(input(f"Jumlah pesanan {nama_menu} "))
+            keranjang_pesanan.tambahkan_pesanan(nama_menu, harga, Jumlah)
+        
+# Fungsi untuk menampilkan pesanan yang sudah ditambahkan
+def tampilkan_pesanan_ditambahkan():
+    print("=========================================================")
+    print("\nTotal Pesanan anda :")
+    keranjang_pesanan.menampilkan_pesanan()
+
+# Fungsi untuk menampilkan jumlah harga yang dibayarkan
+def tampilkan_jumlah_harga():
