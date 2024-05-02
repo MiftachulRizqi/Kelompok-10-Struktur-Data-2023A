@@ -1,0 +1,74 @@
+class Peta:
+    def _init_(self):
+        self.cityList = {}  # Inisialisasi kamus untuk menyimpan kota dan daftar kota terhubung.
+
+    def printPeta(self):
+        for kota in self.cityList:
+            print(kota, ":", self.cityList[kota])
+
+    def tambahkanKota(self, kota):
+        # Menambahkan kota baru ke peta jika belum ada.
+        if kota not in self.cityList:
+            self.cityList[kota] = []  # Kota baru diinisialisasi dengan daftar kosong untuk daftar kota terhubung.
+            return True
+        return False  # Mengembalikan False jika kota sudah ada.
+
+    def hapusKota(self, kota_dihapus):
+        # Menghapus kota dari peta bersama dengan semua jalur terkaitnya.
+        if kota_dihapus in self.cityList:
+            for kotalain in self.cityList:
+                if kota_dihapus in self.cityList[kotalain]:
+                    self.cityList[kotalain].remove(kota_dihapus)  # Menghapus kota dari daftar kota terhubung lainnya.
+            del self.cityList[kota_dihapus]  # Menghapus kota itu sendiri dari peta.
+            return True
+        return False  # Mengembalikan False jika kota tidak ditemukan.
+
+    def tambahkanJalan(self, kota1, kota2):
+        # Menambahkan jalur antara dua kota.
+        if kota1 in self.cityList and kota2 in self.cityList:
+            self.cityList[kota2].append(kota1)  # Menambahkan kota1 ke daftar kota terhubung kota2.
+            self.cityList[kota1].append(kota2)  # Menambahkan kota2 ke daftar kota terhubung kota1.
+            return True
+        return False  # Mengembalikan False jika salah satu atau kedua kota tidak ditemukan.
+
+    def hapusJalan(self, kota1, kota2):
+        # Menghapus jalur antara dua kota.
+        if kota1 in self.cityList and kota2 in self.cityList:
+            self.cityList[kota2].remove(kota1)  # Menghapus kota1 dari daftar kota terhubung kota2.
+            self.cityList[kota1].remove(kota2)  # Menghapus kota2 dari daftar kota terhubung kota1.
+            return True
+        return False  # Mengembalikan False jika salah satu atau kedua kota tidak ditemukan.
+
+    def tambahkanJalanKeSemuaKota(self, kota):
+        # Menambahkan jalur dari satu kota ke semua kota lainnya.
+        if kota in self.cityList:
+            for i in self.cityList:
+                if i != kota and kota not in self.cityList[i]:
+                    self.tambahkanJalan(kota, i)  # Menambahkan jalur dari kota ke semua kota lainnya.
+            return True
+        return False  # Mengembalikan False jika kota tidak ditemukan atau sudah terhubung ke semua kota.
+
+# Penggunaan:
+Peta_Indonesia = Peta()
+Peta_Indonesia.tambahkanKota("Purwodadi")
+Peta_Indonesia.tambahkanKota("Bojonegoro") 
+Peta_Indonesia.tambahkanKota("Ponorogo") 
+Peta_Indonesia.tambahkanKota("Nganjuk") 
+Peta_Indonesia.tambahkanKota("Tulungagung")
+Peta_Indonesia.tambahkanKota("Surabaya") 
+Peta_Indonesia.tambahkanKota("Malang")
+Peta_Indonesia.tambahkanKota("Jember")
+Peta_Indonesia.tambahkanKota("Pamekasan") 
+Peta_Indonesia.tambahkanKota("Situbondo") 
+Peta_Indonesia.tambahkanKota("Sumenep") 
+Peta_Indonesia.tambahkanKota("Banyuwangi")
+
+# Tambahkan 12 jalan untuk setiap kota
+for kota in Peta_Indonesia.cityList:
+    Peta_Indonesia.tambahkanJalanKeSemuaKota(kota)  # Menambahkan jalur dari setiap kota ke semua kota lainnya.
+
+Peta_Indonesia.printPeta()  # Cetak peta setelah penambahan jalan.
+
+print('------------------------------')
+Peta_Indonesia.hapusKota("Jember")  # Hapus kota Salatiga dari peta.
+Peta_Indonesia.printPeta()  # Cetak peta setelah penghapusan kota.
